@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="manifest" href="manifest.json" />
+    <script>
+        window.addEventListener("load", () => {
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                    .register("sw.js", { scope: "./" })
+                    .then(function (reg) { });
+            }
+            if ("cordova" in window) {
+            } else {
+                var OneSignal = window.OneSignal || [];
+                var initConfig = {
+                    appId: "cf788e49-5817-4825-9d4f-eb6fa6d56950",
+                    notifyButton: {
+                        enable: true,
+                    },
+                };
+                OneSignal.push(function () {
+                    OneSignal.SERVICE_WORKER_PARAM = { scope: "push/onesignal/" };
+                    OneSignal.SERVICE_WORKER_PATH =
+                        "push/onesignal/OneSignalSDKWorker.js";
+                    OneSignal.SERVICE_WORKER_UPDATER_PATH =
+                        "push/onesignal/OneSignalSDKUpdaterWorker.js";
+                    OneSignal.init(initConfig);
+                });
+            }
+        });
+    </script>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <title>Projet Top Jean</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img id="logo" src="img/logo.png" />Top pokémon par éléments</a>
+        </div>
+    </nav>
+
+    <div id="modal">
+        <!-- style a faire -->
+        <h1>Plus de connexion internet</h1>
+        <img id="erreur" src="img/erreur.jpg" />
+    </div>
+
+    <div id="app" class="app">
+        <main class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <h1>Top Pokemon</h1>
+                </div>
+            </div>
+            <div class="row" id="list"></div>
+            <div class="row" id="list2">
+                <button class="btnBtn" onclick="retour()">Retour à la liste</button>
+            </div>
+            <button id="ajout" class="btnBtn" onclick="ajout()">Ajouter un top</button>
+            <div id="formAjout">
+                <form>
+                    <label for="name">Nom Top List</label><br>
+                    <input type="text" id="name" name="name"><br>
+                    <label for="description">Description Top List</label><br>
+                    <input type="text" id="description" name="description"><br>
+                    <br><br>
+                    <label for="nameP1">Nom Pokémon 1</label><br>
+                    <input type="text" id="nameP1" name="nameP1"><br>
+                    <label for="nameP2">Nom Pokémon 2</label><br>
+                    <input type="text" id="nameP2" name="nameP2"><br>
+                    <label for="nameP3">Nom Pokémon 3</label><br>
+                    <input type="text" id="nameP3" name="nameP3"><br>
+
+                </form>
+                <button id="ajouterTop" class="btnBtn" onclick="ajoutTop()">Ajouter le top</button>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/native.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/element.js"></script>
+    <script type="text/javascript" src="js/router.js"></script>
+
+    <script type="text/javascript">
+        function retour() {
+            const list = document.getElementById("list");
+            const list2 = document.getElementById("list2");
+            const ajout = document.getElementById("ajout");
+            list.style.display = "block";
+            ajout.style.display = "block";
+            list2.innerHTML = "<button class=\"btnRetour\" onclick=\"retour()\">Retour à la liste</button>";
+            list2.style.display = "none";
+        }
+
+        function ajout() {
+            const list = document.getElementById("list");
+            const ajout = document.getElementById("ajout");
+            const form = document.getElementById("formAjout");
+            list.style.display = "none";
+            ajout.style.display = "none";
+            form.style.display = "block";
+        }
+
+        function ajoutTop() {
+            const list = document.getElementById("list");
+            const ajout = document.getElementById("ajout");
+            const form = document.getElementById("formAjout");
+            list.style.display = "block";
+            ajout.style.display = "block";
+            form.style.display = "none";
+
+            var nomTop = document.getElementById("name").value;
+            var descriptionTop = document.getElementById("description").value;
+            var ajoutTop = [{ "name": nomTop, "description": descriptionTop, "img": "img/elements/new.png" }];
+
+            var pokemon1 = document.getElementById("nameP1").value;
+            var pokemon2 = document.getElementById("nameP2").value;
+            var pokemon3 = document.getElementById("nameP3").value;
+
+            var ajoutPokemon = [{ id: 1, name: pokemon1, img: "new.png" }, { id: 2, name: pokemon2, img: "new.png" }, { id: 3, name: pokemon3, img: "new.png" }];
+            sessionStorage.setItem(nomTop, JSON.stringify(ajoutPokemon));
+            ajoutDuTop(ajoutTop);
+        }
+
+        const ajoutDuTop = (json) => {
+            const divList = document.getElementById("list");
+            json.forEach((element, i) => {
+                const newdivElement = divElement
+                    .replace("__link__", element.name)
+                    .replace("__src__", element.img)
+                    .replace("__top__", "(NEW)")
+                    .replace("__title__", element.name)
+                    .replace("__description__", element.description);
+                divList.appendChild(htmlToElement(newdivElement));
+            });
+        };
+    </script>
+</body>
+
+</html>

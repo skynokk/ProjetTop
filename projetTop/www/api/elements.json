@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Feu",
+        "description": "Retrouver le top des pokémons type feu",
+        "img": "img/elements/feu.jpg"
+    },
+    {
+        "name": "Eau",
+        "description": "Retrouver le top des pokémons type eau",
+        "img": "img/elements/eau.jpg"
+    },
+    {
+        "name": "Plante",
+        "description": "Retrouver le top des pokémons type plante",
+        "img": "img/elements/plante.jpg"
+    }
+]
