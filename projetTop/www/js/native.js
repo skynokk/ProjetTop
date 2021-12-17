@@ -28,11 +28,19 @@ const elementSelect = (link) => {
   fetchApiElementsPokemon(elem);
 };
 
+const openInAppBrowserOptions = "location=yes,zoom=false";
+
+const openInAppBrowser = (link) => {
+  cordova.InAppBrowser.open(link, "_blank", openInAppBrowserOptions);
+};
+
 const divElementPokemon = `
 <div class="col-12 col-md-4">
-  <div class="card">
-    <div class="card-body">
-        <h5 class="card-title"><img src="__src__" class="card-img-top2" /> __top__. __title__</h5>
+  <div onclick="openInAppBrowser('__link__')">
+    <div class="card">
+      <div class="card-body">
+          <h5 class="card-title"><img src="__src__" class="card-img-top2" /> __top__. __title__</h5>
+      </div>
     </div>
   </div>
 </div>
@@ -45,6 +53,7 @@ const fetchApiDonePokemon = (json) => {
       .replace("__src__", "img/pokemons/" + element.img)
       .replace("__top__", element.id)
       .replace("__title__", element.name)
+      .replace("__link__", "https://www.pokepedia.fr/" + element.name)
     divList.appendChild(htmlToElement(newdivElementPokemon));
   });
 };

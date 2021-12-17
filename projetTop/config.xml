@@ -15,9 +15,11 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="SplashScreenDelay" value="1000" />
     <preference name="StatusBarBackgroundColor" value="#ff00ff" />  
     <platform name="android">
         <allow-intent href="market:*" />
+        <splash src="www/img/logos/splash-hdpi.png" density="hdpi" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
